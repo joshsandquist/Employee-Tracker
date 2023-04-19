@@ -37,7 +37,7 @@ function mainMenu() {
                 addRole();
                 break;
               case 'Add an Employee':
-                addEmployee();
+                addNewEmployee();
                 break;
               case 'Update an Employee Role':
                 updateEmployeeRole();
@@ -48,7 +48,7 @@ function mainMenu() {
             }
           });
       }
-
+// Function to display the employee table
 function viewEmployees() {
   db.viewAllEmployees()
     .then((rows) => {
@@ -60,7 +60,7 @@ function viewEmployees() {
       mainMenu();
     });
 }
-
+// function to display the department table
 function viewDepartments() {
     db.viewAllDepartments()
       .then((rows) => {
@@ -72,6 +72,7 @@ function viewDepartments() {
         mainMenu();
       });
   }
+  // function to view the role tablr
   function viewRoles() {
     db.viewAllRoles()
       .then((rows) => {
@@ -83,5 +84,58 @@ function viewDepartments() {
         mainMenu();
       });
   }
+
+  function addNewEmployee() {
+    // Get the list of roles and managers for selection using Promise.all
+    Promise.all([db.viewAllRoles(), db.viewAllEmployees()])
+    //Saving the data to an array for future displating of choices
+    .then(([roles, managers]) => {
+    //Mapping over the roles array and making each role into an object containing a name and value property for use with inquirer
+      const roleChoices = roles.map((role) => ({
+        name: role.title,
+        value: role.id,
+      }));
+      // Same array mapping concept as used before, but now using manger first and last name
+      const managerChoices = managers.map((manager) => ({
+        name: `${manager.first_name} ${manager.last_name}`,
+        value: manager.id,
+      }));
+      //Prompts for creating a new employee
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'first_name',
+            message: "Enter the employee's first name:",
+          },
+          {
+            type: 'input',
+            name: 'last_name',
+            message: "Enter the employee's last name:",
+          },
+        // Implementing the roleChoices and managerChoices variables in order for user to select
+          {
+            type: 'list',
+            name: 'role_id',
+            message: 'Select the role:',
+            choices: roleChoices,
+          },
+          {
+            type: 'list',
+            name: 'manager_id',
+            message: 'Select the manager:',
+            choices: managerChoices
+        },
+    ])
+    // Finally using addEmployee function in our db.js file to add all gathered data and update our employee table
+    .then((answer) => {
+      db.addEmployee(answer.first_name, answer.last_name, answer.role_id, answer.manager_id)
+      .then(() => {
+        console.log('Employee added successfully!');
+        mainMenu();
+      });
+    });
+});
+}
 
   mainMenu()
