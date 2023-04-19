@@ -16,7 +16,11 @@ function mainMenu() {
             'Add a Role',
             'Add an Employee',
             'Update an Employee Role',
-            'Exit']}
+            // Made xit text choice red for easy viewing
+            {
+                name: '\x1b[31mExit\x1b[0m',
+                value: 'Exit',
+              }]}
         ])
         //Using switch statements to run the proper query based on user choice
         .then((answer) => {
