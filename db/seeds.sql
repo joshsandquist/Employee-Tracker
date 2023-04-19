@@ -20,4 +20,18 @@ VALUES
     ('Director of Accounting', 120000, 4),
     ('Accountant', 75000, 4);
 
-
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES
+    ('John', 'Smith', 1, NULL),
+    ('Dan', 'Erikson', 2, 1),
+    ('Wyatt', 'Earp', 3, 2),
+    ('Doc', 'Holliday', 4, 2),
+    ('Ike', 'Clanton', 4, 2),
+    ('Johnny', 'Ringo', 4, 2),
+    ('Ty', 'Webb', 5, 1),
+    ('Carl', 'Spackler', 6, 5),
+    ('Danny', 'Noonan', 6, 5),
+    ('Sheev', 'Palpetine', 7 ,1),
+    ('Anakin', 'Skywalker', 8, 7),
+    ('Leonardo', 'Fibonacci', 9, 1),
+    ('Ada', 'Lovelace', 10, 9);
