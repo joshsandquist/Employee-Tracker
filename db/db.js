@@ -57,12 +57,20 @@ function viewAllDepartments() {
     });
   }
 
-
+  function closeConnection() {
+    return new Promise((resolve, reject) => {
+      connection.end((err) => {
+        if (err) reject(err);
+        resolve();
+      });
+    });
+  }
   //Exporting all functions for use with main index file
   module.exports = {
     viewAllEmployees: viewAllEmployees,
     viewAllDepartments: viewAllDepartments,
     viewAllRoles: viewAllRoles,
-    addEmployee: addEmployee
+    addEmployee: addEmployee,
+    closeConnection: closeConnection
   };
 

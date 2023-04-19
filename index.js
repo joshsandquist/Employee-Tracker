@@ -9,16 +9,45 @@ function mainMenu() {
           name: 'action',
           message: 'What would you like to do?',
           choices: [
-            'View all departments',
-            'View all roles',
-            'View all employees',
-            'Add a department',
-            'Add a role',
-            'Add an employee',
-            'Update an employee role',
+            'View All Departments',
+            'View All Roles',
+            'View All Employees',
+            'Add a Department',
+            'Add a Role',
+            'Add an Employee',
+            'Update an Employee Role',
             'Exit']}
         ])
-    }
+        //Using switch statements to run the proper query based on user choice
+        .then((answer) => {
+            switch (answer.action) {
+              case 'View All Departments':
+                viewDepartments();
+                break;
+              case 'View All Roles':
+                viewRoles();
+                break;
+              case 'View All Employees':
+                viewEmployees();
+                break;
+              case 'Add a Department':
+                addDepartment();
+                break;
+              case 'Add a Role':
+                addRole();
+                break;
+              case 'Add an Employee':
+                addEmployee();
+                break;
+              case 'Update an Employee Role':
+                updateEmployeeRole();
+                break;
+              case 'Exit':
+                db.closeConnection();
+                break;
+            }
+          });
+      }
 
 function viewEmployees() {
   db.viewAllEmployees()
@@ -55,4 +84,4 @@ function viewDepartments() {
       });
   }
 
-viewEmployees()
+  mainMenu()
