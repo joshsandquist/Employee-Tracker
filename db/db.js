@@ -57,6 +57,20 @@ function viewAllDepartments() {
     });
   }
 
+  //function to add a new department, only needs a name peramater
+  function addDepartment(name) {
+    return new Promise((resolve, reject) => {
+      connection.query('INSERT INTO department (name) VALUES (?)', [name], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+
+// Function to quit out of the inquirer instance
   function closeConnection() {
     return new Promise((resolve, reject) => {
       connection.end((err) => {
@@ -65,12 +79,13 @@ function viewAllDepartments() {
       });
     });
   }
-  //Exporting all functions for use with main index file
+  //Exporting all functions into an object for use with main index file
   module.exports = {
     viewAllEmployees: viewAllEmployees,
     viewAllDepartments: viewAllDepartments,
     viewAllRoles: viewAllRoles,
     addEmployee: addEmployee,
+    addDepartment: addDepartment,
     closeConnection: closeConnection
   };
 

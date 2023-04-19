@@ -138,4 +138,23 @@ function viewDepartments() {
 });
 }
 
+// Prompt to add a new department, only needs a name as a value
+function addDepartment() {
+    inquirer
+    .prompt([
+        { type: 'input',
+          name: 'name',
+          message: 'Enter the department name:',
+        },
+      ])
+      .then((answer) => {
+        db.addDepartment(answer.name)
+        .then(() => {
+          console.log('Department added successfully!');
+          mainMenu();
+        });
+      });
+    }
+
+
   mainMenu()

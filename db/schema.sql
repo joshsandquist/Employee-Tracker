@@ -3,12 +3,13 @@ CREATE DATABASE employees;
 
 USE employees;
 
+-- Creates the department table
 CREATE TABLE department (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
 
--- Create the role table
+-- Creates the role table. We will be linking the department id from our department table onto the role
 CREATE TABLE role (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
@@ -17,7 +18,7 @@ CREATE TABLE role (
   FOREIGN KEY (department_id) REFERENCES department (id)
 );
 
--- Create the employee table
+-- Creates the employee table. We will be linking both the role id from the role table, and the manager id from the same employee table
 CREATE TABLE employee (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
