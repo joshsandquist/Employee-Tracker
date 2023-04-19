@@ -16,18 +16,18 @@ function viewAllEmployees() {
         }
       });
     });
-  }
+  };
 
 //Function that should return all departments and data when called
 function viewAllDepartments() {
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM department', (err, rows) => {
         if (err) {
-          reject(err);
+          reject(err)
         } else {
           resolve(rows);
         }
-      });
+      })
     });
   }
 // Function to view all roles. Joined department_name from department table to display name instead of id
@@ -40,7 +40,7 @@ function viewAllDepartments() {
         } else {
           resolve(rows);
         }
-      });
+      })
     });
   }
   
@@ -49,13 +49,13 @@ function viewAllDepartments() {
       return new Promise((resolve, reject) => {
         connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [first_name, last_name, role_id, manager_id], (err, result) => {
         if (err) {
-          reject(err);
+          reject(err)
         } else {
           resolve(result);
         }
-      });
+      })
     });
-  }
+  };
 
   //function to add a new department, only needs a name peramater
   function addDepartment(name) {
@@ -66,8 +66,8 @@ function viewAllDepartments() {
         } else {
           resolve(result);
         }
-      });
-    });
+      })
+    })
   }
 // Function to add a new role, needs to include the role title, salary and department id of the parent department
   function addRole(title, salary, department_id) {
@@ -78,15 +78,28 @@ function viewAllDepartments() {
         } else {
           resolve(result);
         }
-      });
-    });
+      })
+    })
   }
-  
+  // Function to update an existing employee with a new role
+  // Using the SQL update method by using role id and employee id
+  function updateEmployeeRole(employee_id, role_id) {
+    return new Promise((resolve, reject) => {
+      connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [role_id, employee_id], (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  }
+
 // Function to quit out of the inquirer instance
   function closeConnection() {
     return new Promise((resolve, reject) => {
       connection.end((err) => {
-        if (err) reject(err);
+        if (err) reject(err)
         resolve();
       });
     });
@@ -99,6 +112,7 @@ function viewAllDepartments() {
     addEmployee: addEmployee,
     addDepartment: addDepartment,
     addRole : addRole,
+    updateEmployeeRole: updateEmployeeRole,
     closeConnection: closeConnection
   };
 

@@ -192,11 +192,50 @@ function addNewRole () {
             .then((answer) => {
                 db.addRole(answer.title, answer.salary, answer.department_id)
                 .then(() => {
-                  console.log('Role added successfully!')
+                  console.log('Role added successfully!');
                   mainMenu();
                 })
-              })
-          })
+              });
+          });
         };
+
+        function updateEmployeeRole() {
+  // Same method as before for gathering table data, this time using employye and role tables
+  Promise.all([db.viewAllEmployees(), db.viewAllRoles()])
+  // Mapping and saving the employee data we need for use with inquirer
+    .then(([employees, roles]) => {
+    const employeeChoices = employees.map((employee) => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    }));
+// Mapping and saving the role data we need for use with inquirer
+    const roleChoices = roles.map((role) => ({
+      name: role.title,
+      value: role.id,
+    }))
+
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'employee_id',
+          message: 'Select the employee to update:',
+          choices: employeeChoices,
+        },
+        {
+          type: 'list',
+          name: 'role_id',
+          message: 'Select the new role:',
+          choices: roleChoices,
+        },
+      ])
+      .then((answer) => {
+        db.updateEmployeeRole(answer.employee_id, answer.role_id).then(() => {
+          console.log('Employee role updated successfully!')
+          mainMenu();
+        })
+      })
+  })
+}
 
   mainMenu()
