@@ -1,7 +1,7 @@
 //requiring connetion variable used for mysql2 login credentials
 const connection = require('./connection')
 
-//Function that should return all employees and data when called. Joined manager data from the same table to list the manager by name and not id for the employee
+//Function that should return all employees and data when called. Joined manager data from the same table to list the manager by name and not id for the employee.
 function viewAllEmployees() {
     return new Promise((resolve, reject) => {
       connection.query(`SELECT emp.id, emp.first_name, emp.last_name, role.title, role.salary, CONCAT(mgr.first_name, ' ', mgr.last_name) AS manager
@@ -69,7 +69,19 @@ function viewAllDepartments() {
       });
     });
   }
-
+// Function to add a new role, needs to include the role title, salary and department id of the parent department
+  function addRole(title, salary, department_id) {
+    return new Promise((resolve, reject) => {
+      connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [title, salary, department_id], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+  
 // Function to quit out of the inquirer instance
   function closeConnection() {
     return new Promise((resolve, reject) => {
@@ -86,6 +98,7 @@ function viewAllDepartments() {
     viewAllRoles: viewAllRoles,
     addEmployee: addEmployee,
     addDepartment: addDepartment,
+    addRole : addRole,
     closeConnection: closeConnection
   };
 

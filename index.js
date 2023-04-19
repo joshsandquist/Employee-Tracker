@@ -34,7 +34,7 @@ function mainMenu() {
                 addDepartment();
                 break;
               case 'Add a Role':
-                addRole();
+                addNewRole();
                 break;
               case 'Add an Employee':
                 addNewEmployee();
@@ -85,7 +85,8 @@ function viewDepartments() {
       });
   }
 
-  function addNewEmployee() {
+// Prompt function for adding a new employee to the database
+function addNewEmployee() {
     // Get the list of roles and managers for selection using Promise.all
     Promise.all([db.viewAllRoles(), db.viewAllEmployees()])
     //Saving the data to an array for future displating of choices
@@ -94,12 +95,12 @@ function viewDepartments() {
       const roleChoices = roles.map((role) => ({
         name: role.title,
         value: role.id,
-      }));
+      }))
       // Same array mapping concept as used before, but now using manger first and last name
       const managerChoices = managers.map((manager) => ({
         name: `${manager.first_name} ${manager.last_name}`,
         value: manager.id,
-      }));
+      }))
       //Prompts for creating a new employee
       inquirer
         .prompt([
@@ -131,12 +132,12 @@ function viewDepartments() {
     .then((answer) => {
       db.addEmployee(answer.first_name, answer.last_name, answer.role_id, answer.manager_id)
       .then(() => {
-        console.log('Employee added successfully!');
-        mainMenu();
-      });
-    });
-});
-}
+        console.log('Employee added successfully!')
+        mainMenu()
+      })
+    })
+})
+};
 
 // Prompt to add a new department, only needs a name as a value
 function addDepartment() {
@@ -150,11 +151,52 @@ function addDepartment() {
       .then((answer) => {
         db.addDepartment(answer.name)
         .then(() => {
-          console.log('Department added successfully!');
+          console.log('Department added successfully!')
           mainMenu();
-        });
-      });
-    }
+        })
+      })
+    };
+    
+// Prompt to add a new role to the database
 
+function addNewRole () {
+    //Similar to the addNewEmployee function, we will need to gather data from the database to give the user choices
+
+    db.viewAllDepartments()
+    .then((departments) => {
+    // Mapping the departments table to gather choices for the user to assign the new role to
+        const departmentChoices = departments.map((depts) => ({
+            name: depts.name,
+            value: depts.id
+        }))
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'title',
+                    message: 'Enter the role title:',
+                  },
+                  {
+                    type: 'input',
+                    name: 'salary',
+                    message: 'Enter the role salary:',
+                  },
+                  {
+                    type: 'list',
+                    name: 'department_id',
+                    message: 'Select the department:',
+                    choices: departmentChoices,
+                  },
+            ])
+            // User choices will be added as a new role in the role table
+            .then((answer) => {
+                db.addRole(answer.title, answer.salary, answer.department_id)
+                .then(() => {
+                  console.log('Role added successfully!')
+                  mainMenu();
+                })
+              })
+          })
+        };
 
   mainMenu()
