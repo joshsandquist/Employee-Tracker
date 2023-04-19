@@ -29,9 +29,9 @@ VALUES
     ('Ike', 'Clanton', 4, 2),
     ('Johnny', 'Ringo', 4, 2),
     ('Ty', 'Webb', 5, 1),
-    ('Carl', 'Spackler', 6, 5),
-    ('Danny', 'Noonan', 6, 5),
+    ('Carl', 'Spackler', 6, 7),
+    ('Danny', 'Noonan', 6, 7),
     ('Sheev', 'Palpetine', 7 ,1),
-    ('Anakin', 'Skywalker', 8, 7),
+    ('Anakin', 'Skywalker', 8, 10),
     ('Leonardo', 'Fibonacci', 9, 1),
-    ('Ada', 'Lovelace', 10, 9);
+    ('Ada', 'Lovelace', 10, 12);

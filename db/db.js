@@ -3,9 +3,11 @@ const connection = require('./connection')
 
 //Function that should return all Employees and data when called
 function viewAllEmployees(table) {
-    //Refactored the query to include employee salary from the role table in the function
     connection.query(
-      'SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id;',
+      `SELECT emp.id, emp.first_name, emp.last_name, role.title, role.salary, CONCAT(mgr.first_name, ' ', mgr.last_name) AS manager
+      FROM employee AS emp
+      LEFT JOIN role ON emp.role_id = role.id
+      LEFT JOIN employee AS mgr ON emp.manager_id = mgr.id;`,
       (err, rows) => {
         if (err) throw err;
         table(rows);
