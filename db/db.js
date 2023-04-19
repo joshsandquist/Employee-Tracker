@@ -20,10 +20,20 @@ function viewAllDepartments(table) {
       table(rows);
     });
   }
-
+// Function to view all roles. Joined department_name from department table to display name instead of id
+  function viewAllRoles(table) {
+    connection.query(
+      'SELECT role.id, role.title, role.salary, department.name as department_name FROM role LEFT JOIN department ON role.department_id = department.id;',
+      (err, rows) => {
+        if (err) throw err;
+        table(rows);
+      }
+    );
+  }
   //Exporting all functions for use with main index file
   module.exports = {
     viewAllEmployees: viewAllEmployees,
-    viewAllDepartments: viewAllDepartments
+    viewAllDepartments: viewAllDepartments,
+    viewAllRoles: viewAllRoles
   };
 
