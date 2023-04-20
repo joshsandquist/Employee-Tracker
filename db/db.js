@@ -95,7 +95,7 @@ function viewAllDepartments() {
     })
   }
 
-// Function to quit out of the inquirer instance
+// Function to quit out of the inquirer instance.
   function closeConnection() {
     return new Promise((resolve, reject) => {
       connection.end((err) => {
@@ -104,7 +104,7 @@ function viewAllDepartments() {
       });
     });
   }
-  //Exporting all functions into an object for use with main index file
+  //Exporting all functions into an object for use with main index file.
   module.exports = {
     viewAllEmployees: viewAllEmployees,
     viewAllDepartments: viewAllDepartments,

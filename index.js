@@ -16,7 +16,7 @@ function mainMenu() {
             'Add a Role',
             'Add an Employee',
             'Update an Employee Role',
-            // Made xit text choice red for easy viewing
+            // Made Exit text choice red for easy viewing
             {
                 name: '\x1b[31mExit\x1b[0m',
                 value: 'Exit',
