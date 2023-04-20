@@ -35,5 +35,9 @@
 
 https://drive.google.com/file/d/107DuyxyOJmbXVW0vv3W0BXAHge77muVk/view?usp=sharing
 
+  ## GitHub Repo
+  
+  https://github.com/joshsandquist/Employee-Tracker
+
   ## Questions
   If you have any questions or comments about this application, please feel free to contact me on GitHub at https://github.com/joshsandquist.
