@@ -81,8 +81,8 @@ function viewAllDepartments() {
       })
     })
   }
-  // Function to update an existing employee with a new role
-  // Using the SQL update method by using role id and employee id
+  // Function to update an existing employee with a new role.
+  // Using the SQL update method by using role id and employee id.
   function updateEmployeeRole(employee_id, role_id) {
     return new Promise((resolve, reject) => {
       connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [role_id, employee_id], (err, result) => {

@@ -19,7 +19,6 @@
   ## Usage
   After installing the required packages, fill in the connection.js file with you mysql login information. Within the mysql shell, run SOURCE db/schema.sql; to set up the database. Optionally, SOURCE db/seeds.sql; can be run to seed the database. Finally, from the main command line, run 'node index.js' to start the application.
 
-  
 
   ## Contributing
   N/A

@@ -16,7 +16,7 @@ function mainMenu() {
             'Add a Role',
             'Add an Employee',
             'Update an Employee Role',
-            // Made Exit text choice red for easy viewing
+            // Made Exit text choice red for easy viewing.
             {
                 name: '\x1b[31mExit\x1b[0m',
                 value: 'Exit',
@@ -99,12 +99,12 @@ function addNewEmployee() {
       const roleChoices = roles.map((role) => ({
         name: role.title,
         value: role.id,
-      }))
+      }));
       // Same array mapping concept as used before, but now using manger first and last name
       const managerChoices = managers.map((manager) => ({
         name: `${manager.first_name} ${manager.last_name}`,
         value: manager.id,
-      }))
+      }));
       //Prompts for creating a new employee
       inquirer
         .prompt([
@@ -138,7 +138,7 @@ function addNewEmployee() {
       .then(() => {
         console.log('Employee added successfully!')
         mainMenu()
-      })
+      });
     })
 })
 };
@@ -216,7 +216,7 @@ function addNewRole () {
     const roleChoices = roles.map((role) => ({
       name: role.title,
       value: role.id,
-    }))
+    }));
 
     inquirer
       .prompt([
@@ -237,9 +237,9 @@ function addNewRole () {
         db.updateEmployeeRole(answer.employee_id, answer.role_id).then(() => {
           console.log('Employee role updated successfully!')
           mainMenu();
-        })
-      })
-  })
-}
+        });
+      });
+  });
+};
 
   mainMenu()
