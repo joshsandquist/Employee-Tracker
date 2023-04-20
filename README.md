@@ -27,10 +27,13 @@
   N/A
 
   ## ScreenShots
+  
+<img width="1286" alt="Screenshot 2023-04-19 at 5 29 51 PM" src="https://user-images.githubusercontent.com/104536533/233227824-9f313086-dfa0-4c01-a4e3-78ac23d9845a.png">
 
 
   ## Video
 
+https://drive.google.com/file/d/107DuyxyOJmbXVW0vv3W0BXAHge77muVk/view?usp=sharing
 
   ## Questions
   If you have any questions or comments about this application, please feel free to contact me on GitHub at https://github.com/joshsandquist.
